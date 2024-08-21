@@ -1,16 +1,20 @@
 import React from "react";
-import {imgBaseURL} from "../data/daseURL.json";
+import { imgBaseURL } from "../data/daseURL.json";
 
 export default function MovieCard({ poster, title, rating }) {
   return (
-    <div>
+    <div className=" relative group">
       <div className="relative aspect-[3/4] object-cover rounded-md overflow-hidden flex items-center">
-        <img src={`${imgBaseURL}/${poster}`} alt="" className="" />
-        <div className="p-3 w-full h-12 text-right leading-loose  absolute bottom-0 text-white drop-shadow-md bg-gradient-to-b from-white/0 to-black">
+        <div className="p-3 w-full h-12 text-right leading-loose  absolute bottom-0 text-white drop-shadow-md bg-gradient-to-b from-white/0 to-black ">
           {rating}
         </div>
+        <img src={`${imgBaseURL}/${poster}`} alt="" className="" />
+        <div className="absolute top-0 left-0  w-full h-full flex justify-center items-center rounded-md hover:bg-black/50  ">
+          <p className="font-bold text-lg px-4 drop-shadow-md  text-white/0 group-hover:text-white">
+            {title}
+          </p>
+        </div>
       </div>
-      <p className="font-bold text-lg">{title}</p>
     </div>
   );
 }

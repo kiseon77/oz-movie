@@ -15,7 +15,7 @@ export default function MovieDetail() {
   };
   return (
     <section
-      className={`bg-cover bg-no-repeat bg-center`}
+      className={` relative bg-cover bg-no-repeat bg-center  h-full`}
       style={{
         backgroundImage: `url("${imgBaseURL}/${movieDetail.backdrop}")`,
       }}
