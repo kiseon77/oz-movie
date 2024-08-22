@@ -1,29 +1,33 @@
-import React from "react";
-import movieDetailData from "../data/movieDetailData.json";
+import React, { useEffect, useState } from "react";
 import { imgBaseURL } from "../data/daseURL.json";
+import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 export default function MovieDetail() {
-  console.log(movieDetailData);
+  const movie_id = useParams();
+  const url = `https://api.themoviedb.org/3/movie/${movie_id.id}?language=ko`;
 
-  const movieDetail = {
-    backdrop: movieDetailData.backdrop_path,
-    poster: movieDetailData.poster_path,
-    title: movieDetailData.title,
-    popularity: movieDetailData.vote_average,
-    genres: movieDetailData.genres,
-    overview: movieDetailData.overview,
-  };
+  const [movieDitailApi] = useFetch(url, "GET");
+  const [movieDetail, setMovieDetail] = useState({});
+
+  useEffect(() => {
+    if (movieDitailApi) setMovieDetail(movieDitailApi);
+  }, [movieDitailApi]);
+
   return (
     <section
       className={` relative bg-cover bg-no-repeat bg-center  h-full`}
       style={{
-        backgroundImage: `url("${imgBaseURL}/${movieDetail.backdrop}")`,
+        backgroundImage: `url("${imgBaseURL}/${movieDetail.backdrop_path}")`,
       }}
     >
       <div className=" absolute bottom-0 w-full h-full bg-gradient-to-b from-white/0  to-50%  to-white"></div>
       <div className="flex gap-6 p-6">
         <article className="flex-1 rounded-2xl overflow-hidden border-2 border-gray-200 drop-shadow-lg">
-          <img src={`${imgBaseURL}/${movieDetail.poster}`} className="w-full" />
+          <img
+            src={`${imgBaseURL}/${movieDetail.poster_path}`}
+            className="w-full"
+          />
         </article>
 
         <article className="flex-1 rounded-2xl p-5 bg-white  drop-shadow-xl border-2 border-gray-200 ">
@@ -36,7 +40,7 @@ export default function MovieDetail() {
             </div>
 
             <div className="my-6">
-              {movieDetail.genres.map((genres) => (
+              {movieDetail.genres?.map((genres) => (
                 <span
                   key={genres.id}
                   className="mr-2 font-mono px-2 py-1 rounded-full border-2 bg-gray-200 text-gray-500 border-gray-300"

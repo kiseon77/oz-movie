@@ -5,3 +5,7 @@
 *{
   color: #121212;
 }
+
+input{
+  @apply border-2 border-slate-600 rounded-lg py-1 px-2
+}
