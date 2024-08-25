@@ -20,6 +20,5 @@ export default function useFetch(url, method) {
       .catch((err) => console.error("error:" + err));
   }, [url]);
 
-  console.log(value);
   return [value];
 }

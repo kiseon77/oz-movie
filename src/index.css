@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+* {
   color: #121212;
 }
 
-input{
-  @apply border-2 border-slate-600 rounded-lg py-1 px-2
+input {
+  @apply border-2 border-slate-600 rounded-lg py-1 px-2;
 }

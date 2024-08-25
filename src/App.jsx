@@ -13,12 +13,13 @@ function App() {
 
   useEffect(() => {
     if (movieListApi) setMovieList(movieListApi.results);
-    console.log("hi");
   }, [movieListApi]);
 
+  
+  console.log(movieList);
   return (
     <>
-    <NavBar/>
+      <NavBar setMovieList={setMovieList} />
       <main className="m-8 grid grid-cols-4 gap-8">
         {movieList.map((movie) => {
           return (
