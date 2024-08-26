@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "./hooks/useFetch";
 import NavBar from "./components/NavBar";
+import Layout from "./components/Layout";
 
 function App() {
   const url = "https://api.themoviedb.org/3/movie/popular?language=ko&page=1";
@@ -15,12 +16,9 @@ function App() {
     if (movieListApi) setMovieList(movieListApi.results);
   }, [movieListApi]);
 
-  
-  console.log(movieList);
   return (
-    <>
-      <NavBar setMovieList={setMovieList} />
-      <main className="m-8 grid grid-cols-4 gap-8">
+    <Layout setMovieList={setMovieList} searchBar="block" sign="로그인">
+      <main className="m-8 grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
         {movieList.map((movie) => {
           return (
             <Link to={`/details/${movie.id}`} key={movie.id}>
@@ -33,7 +31,7 @@ function App() {
           );
         })}
       </main>
-    </>
+    </Layout>
   );
 }
 
