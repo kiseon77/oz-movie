@@ -3,7 +3,6 @@ import MovieCard from "./components/MovieCard";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "./hooks/useFetch";
-import NavBar from "./components/NavBar";
 import Layout from "./components/Layout";
 
 function App() {
@@ -17,8 +16,8 @@ function App() {
   }, [movieListApi]);
 
   return (
-    <Layout setMovieList={setMovieList} searchBar="block" sign="로그인">
-      <main className="m-8 grid gap-8 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+    <Layout setMovieList={setMovieList} searchBar="block" showSign="block">
+      <main className="m-8 grid gap-8 tablet:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-5">
         {movieList.map((movie) => {
           return (
             <Link to={`/details/${movie.id}`} key={movie.id}>

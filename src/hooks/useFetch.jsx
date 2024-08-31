@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-const tmdbkey = import.meta.env.VITE_API_TMDB_KEY;
 const tmdbtoken = import.meta.env.VITE_API_TMDB_READ_TOKEN;
 
 export default function useFetch(url, method) {

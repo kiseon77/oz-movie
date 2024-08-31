@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { imgBaseURL } from "../data/daseURL.json";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import Layout from "../components/Layout";
 
-export default function MovieDetail() {
+export default function MovieDetail({setSign, sign}) {
   const movie_id = useParams();
   const url = `https://api.themoviedb.org/3/movie/${movie_id.id}?language=ko`;
 
@@ -22,7 +22,7 @@ export default function MovieDetail() {
         backgroundImage: `url("${imgBaseURL}/${movieDetail.backdrop_path}")`,
       }}
     >
-      <Layout searchBar="hidden" sign="로그인">
+      <Layout searchBar="hidden" sign={sign}>
         <section>
           <div className=" absolute bottom-0 w-full h-full bg-gradient-to-b from-white/0  to-50%  to-white"></div>
           <div className="flex gap-6 p-6">

@@ -1,14 +1,34 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import useDebounce from "../hooks/useDebounce";
 import useFetch from "../hooks/useFetch";
+import supabase from "../supabaseClient";
+import { userSlice } from "../redux/redux";
 
-export default function NavBar({ setMovieList, searchBar, sign }) {
+export default function NavBar({ setMovieList, searchBar, showSign }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [inputValue, setInputValue] = useState();
   const url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&include_adult=false&language=ko&page=1`;
   const [movieSearchListApi] = useFetch(url, "GET");
   const [searchDebounce] = useDebounce(movieSearchListApi, 3000);
+  const user = useSelector((state) => state.user);
+  console.log(user);
+
+  const signOutHandler = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) console.log(error);
+      dispatch(userSlice.actions.signOut());
+      alert("로그아웃 되셨습니다.");
+      navigate("/");
+      location.reload(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (searchDebounce && inputValue !== undefined) {
@@ -53,7 +73,7 @@ export default function NavBar({ setMovieList, searchBar, sign }) {
             className={`material-symbols-outlined ${
               inputValue || inputValue !== undefined ? "inline" : "hidden"
             } text-slate-400 pr-1`}
-            onClick={(e) => {
+            onClick={() => {
               setInputValue();
             }}
           >
@@ -68,19 +88,19 @@ export default function NavBar({ setMovieList, searchBar, sign }) {
           search
         </button>
       </form>
-
-      {sign == "로그인" ? (
-        <div
-          onClick={() => {
-            navigate("/signin");
-          }}
-          className="cursor-pointer text-sm flex-none leading-8 "
-        >
-          {sign}
-        </div>
-      ) : (
-        ""
-      )}
+      <div className={`cursor-pointer text-sm flex-none leading-8 ${showSign}`}>
+        {user.sign ? (
+          <div onClick={signOutHandler}>로그아웃</div>
+        ) : (
+          <div
+            onClick={() => {
+              navigate("/signin");
+            }}
+          >
+            로그인
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

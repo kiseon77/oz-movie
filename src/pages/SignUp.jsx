@@ -1,8 +1,12 @@
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Layout from "../components/Layout";
+import supabase from "../supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const {
     register,
     watch,
@@ -10,22 +14,37 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (userinfoData) => {
     try {
+      const { data, error } = await supabase.auth.signUp({
+        email: userinfoData.email,
+        password: userinfoData.password,
+        options: {
+          data: {
+            name: userinfoData.name,
+          },
+        },
+      });
+
       console.log(data);
-    } catch (err) {
-      console.log(err);
+      if (error) console.log(error);
+    } catch (error) {
+      console.log(userinfoData);
+      console.log(error);
     }
   };
 
   return (
-    <Layout searchBar="hidden" sign="로그인">
-      <div className="w-1/2 m-auto">
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="name">
+    <Layout searchBar="hidden" showSign="hidden">
+      <div className="w-1/2 m-auto ">
+        <form
+          className="flex flex-col gap-5 mb-9"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <label>
             <span className="text-sm ml-3">이름</span>
             <input
-              id="name"
+              name="name"
               type="text"
               placeholder="이름"
               {...register("name", {
@@ -40,10 +59,10 @@ export default function SignUp() {
               }}
             />
           </label>
-          <label htmlFor="email">
+          <label>
             <span className="text-sm ml-3">이메일</span>
             <input
-              id="email"
+              name="email"
               type="email"
               placeholder="이메일"
               {...register("email", {
@@ -58,10 +77,10 @@ export default function SignUp() {
               }}
             />
           </label>
-          <label htmlFor="password">
+          <label>
             <span className="text-sm ml-3">비밀번호</span>
             <input
-              id="password"
+              name="password"
               type="password"
               placeholder="비밀번호"
               {...register("password", {
@@ -76,10 +95,10 @@ export default function SignUp() {
               }}
             />
           </label>
-          <label htmlFor="passwordConfirm">
+          <label>
             <span className="text-sm ml-3">비밀번호 확인</span>
             <input
-              id="passwordConfirm"
+              name="passwordConfirm"
               type="password"
               placeholder="비밀번호 확인"
               {...register("passwordConfirm", {
@@ -100,6 +119,13 @@ export default function SignUp() {
           </label>
           <button className="primary_fill_button">회원가입</button>
         </form>
+        <button
+          type="button"
+          className="primary_stroke_button w-full"
+          onClick={() => navigate("/signin")}
+        >
+          로그인
+        </button>
       </div>
     </Layout>
   );
