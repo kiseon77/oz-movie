@@ -1,1 +1,4 @@
-{  "imgBaseURL" : "https://image.tmdb.org/t/p/w500"}
+{
+  "imgBaseURL": "https://image.tmdb.org/t/p/w500",
+  "NowPlaying": "https://api.themoviedb.org/3/movie/now_playing?language=ko"
+}

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "./hooks/useFetch";
 import Layout from "./components/Layout";
-
+import Caroulse from "./components/Caroulse";
 function App() {
   const url = "https://api.themoviedb.org/3/movie/popular?language=ko&page=1";
 
@@ -17,6 +17,7 @@ function App() {
 
   return (
     <Layout setMovieList={setMovieList} searchBar="block" showSign="block">
+      <Caroulse />
       <main className="m-8 grid gap-8 tablet:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-5">
         {movieList.map((movie) => {
           return (

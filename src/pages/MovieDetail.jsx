@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { imgBaseURL } from "../data/daseURL.json";
+import { imgBaseURL } from "../data/daseURL";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import Layout from "../components/Layout";
 
-export default function MovieDetail({setSign, sign}) {
+export default function MovieDetail({ setSign, sign }) {
   const movie_id = useParams();
   const url = `https://api.themoviedb.org/3/movie/${movie_id.id}?language=ko`;
 
@@ -17,7 +17,7 @@ export default function MovieDetail({setSign, sign}) {
 
   return (
     <div
-      className={` relative bg-cover bg-no-repeat bg-center  h-full pointer-events-none`}
+      className={`relative bg-cover bg-no-repeat bg-center  h-full pointer-events-none pointer-events-none`}
       style={{
         backgroundImage: `url("${imgBaseURL}/${movieDetail.backdrop_path}")`,
       }}

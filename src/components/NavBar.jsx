@@ -46,12 +46,12 @@ export default function NavBar({ setMovieList, searchBar, showSign }) {
     }
   };
   return (
-    <nav className="py-6 px-11 flex justify-between">
+    <nav className="py-6 px-11 flex justify-between z-50 pointer-events-auto">
       <h1
         onClick={() => {
           navigate("/");
         }}
-        className="material-symbols-outlined cursor-pointer flex-none leading-8"
+        className="material-symbols-outlined cursor-pointer flex-none leading-8 "
       >
         comedy_mask
       </h1>

@@ -16,30 +16,29 @@
 
 input:-webkit-autofill:hover,
 input:-webkit-autofill:active {
-	-webkit-text-fill-color: #000;
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-    box-shadow: 0 0 0px 1000px #fff inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 input:autofill,
 input:autofill:hover,
 input:autofill:active {
-	-webkit-text-fill-color: #000;
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-    box-shadow: 0 0 0px 1000px #fff inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 input {
   @apply w-full py-2 px-4 rounded-lg border-2 border-slate-200 text-base;
 }
-input:focus
-{
-  @apply border-slate-400 outline-none border-2 bg-slate-50 ;
+input:focus {
+  @apply border-slate-400 outline-none border-2 bg-slate-50;
 }
 
-.err{
-   @apply text-sm text-red-500
+.err {
+  @apply text-sm text-red-500;
 }
 
 .primary_fill_button {
@@ -47,4 +46,7 @@ input:focus
 }
 .primary_stroke_button {
   @apply border-2 border-slate-800 text-slate-900 rounded py-2 px-4;
+}
+.hidden_scrollbar::-webkit-scrollbar {
+  display: none;
 }

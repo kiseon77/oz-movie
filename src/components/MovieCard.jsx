@@ -1,5 +1,5 @@
 import React from "react";
-import { imgBaseURL } from "../data/daseURL.json";
+import { imgBaseURL } from "../data/daseURL";
 
 export default function MovieCard({ poster, title, rating }) {
   return (
